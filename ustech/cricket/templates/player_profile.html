@@ -1,0 +1,49 @@
+{% extends 'base.html' %}{% load static %}
+
+{% block body_block %}
+
+<section>
+    <div class="container profile-wraper" id="profile">
+        <div class="teams-section profile-wraper">
+            <div class="profile-content">
+
+                <div class="row">
+                    <div class="col-md-6 profile-left">
+                        <img src="{{ player.image.url }}">
+                    </div>
+                    <div class="col-md-6 profile-right">
+                        <div class="row">
+                            <div class="col-md-12 text-center name-text">
+                               {{ player.first_name|title }} {{ player.last_name|title }}
+                            </div>
+
+                            <div class="col-md-12">
+                                <span>50s:</span> {{ fifties }}
+                            </div>
+
+                            <div class="col-md-12">
+                                <span>100s:</span> {{ hundreds }}
+                            </div>
+
+                            <div class="col-md-12">
+                                <span>Runs:</span> {{ run }}
+                            </div>
+
+                            <div class="col-md-12">
+                                <span>Wickets:</span> {{ wickets }}
+                            </div>
+
+                            <div class="col-md-12">
+                                <span>Catches:</span> {{ catches }}
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

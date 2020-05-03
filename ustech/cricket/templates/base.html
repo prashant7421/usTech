@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>USTech Solutions</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+
+{% block head_block %}
+    
+{% endblock %}
+</head>
+<body>
+    {% if messages %}>
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{ message.tags }}</strong>{{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">USTech Solutions</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'index' %}#home">Home</a></li>
+                <li><a href="{% url 'index' %}#points_table">Points Table</a></li>
+                <li><a href="{% url 'index' %}#fixtures">Upcoming Matches</a></li>
+                <li><a href="{% url 'index' %}#teams">Teams</a></li>
+            </ul>
+            <a class="btn btn-danger navbar-btn" href="http://{{ request.get_host }}/admin/">Create Fixtures</a>
+        </div>
+    </nav>
+
+    <div class="body-wrap">
+        {% block body_block %}
+        
+        
+
+        {% endblock %}
+    </div>
+</body>
+</html>

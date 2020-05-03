@@ -1,0 +1,163 @@
+{% extends 'base.html' %}{% load static %}{% load custom_tags %}
+
+{% block body_block %}
+
+    <section>
+        <div class="container" id="home">
+            <div class="overlay"></div>
+            <img src="{% static 'images/us_banner.jpg'%}" alt="Snow" style="width:100%;">
+            
+            <div class="centered">US Tech Championship</div>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container" id="points_table">
+            <div class="teams-section">
+                <div class="table-header">
+                    <img src="{% static 'images/points.png' %}"> <span>Points Table</span>
+                </div>
+
+                <div class="inner-row">
+                    <table >
+                        <thead>
+                            <tr class="yellow-background">
+                    
+                                <td class="sub-height header-weight">Team</td>
+                                <td class="sub-height header-weight">Name</td>
+                                <td class="sub-height header-weight">Played</td>
+                                <td class="sub-height header-weight">Won</td>
+                                <td class="sub-height header-weight">Lost</td>
+                                <td class="sub-height header-weight">Draw</td>
+                                <td class="sub-height header-weight">NET RR</td>
+                                <td class="sub-height header-weight">Points</td>
+                            </tr>
+                        </thead>
+                    
+                        <tbody>
+                            {% for team in p_table%}
+                                <tr>
+                                    <td class="sub-height"><img src="{{ team.team.logo.url }}">  </td>
+                                    <td class="sub-height">{{ team.team.name }}</td>
+                                    <td class="sub-height">{{ team.played }}</td>
+                                    <td class="sub-height">{{ team.won }}</td>
+                                    <td class="sub-height">{{ team.lost }}</td>
+                                    <td class="sub-height">{{ team.draw }}</td>
+                                    <td class="sub-height">{{ team.nrr }}</td>
+                                    <td class="sub-height">{{ team.points }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+    
+            </div>
+    
+    
+        </div>
+    </section>
+
+    <section>
+        <div class="container" id="fixtures">
+            <div class="teams-section">
+                <div class="table-header">
+                    <img src="{% static 'images/fixtures.png' %}"> <span>Upcoming Matches</span>
+                </div>
+
+                {% for match in matches%}
+                    <div class="fixtures">
+                        <div class="row">
+                            <div class="col-md-12 header">
+                                <h5>{{ match.match_date }}</h5>
+                            </div>
+                            <div class="col-md-12 header">
+                                <h5>{{ match.title }}</h5>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-lg-4"><img src="{{ match.team1.logo.url }}"></div>
+                            <div class="col-md-4 col-sm-4 col-lg-4"><span>Vs</span></div>
+                            <div class="col-md-4 col-sm-4 col-lg-4"><img src="{{ match.team2.logo.url }}"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            
+               
+
+               
+            </div>
+
+
+
+        </div>
+
+
+    </section>
+
+
+    <section>
+        <div class="container" id="teams">
+            <div class="teams-section">
+                    <div class="table-header">
+                        <img src="{% static 'images/teams-header.png' %}"> <span>Teams</span>
+                    </div>
+               
+                    <table class="table">
+                        <tbody>
+                            {% for team in teams%}
+                                <tr class="accordion-toggle collapsed yellow-background" id="accordion{{ forloop.counter }}" data-toggle="collapse"
+                                    data-parent="#accordion{{ forloop.counter }}" href="#collapse{{ forloop.counter }}">
+                                    <td class="expand-button accordion "></td>
+                                    <td class="full-width">
+                                        <ul class="list-inline">
+                                            <li><img src="{{ team.team.logo.url }}"></li>
+                                            <li>
+                                                <h4>{{ team.team.name }}</h4>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+
+                                <tr class="hide-table-padding">
+                                    <td></td>
+                                
+                                    <td colspan="3">
+                                        <div id="collapse{{ forloop.counter }}" class="collapse in p-3">
+                                
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                
+                                                        <td class="sub-height header-weight"></td>
+                                                        <td class="sub-height header-weight">Player Name</td>
+                                                        <td class="sub-height header-weight">Jersey No</td>
+                                                        <td class="sub-height header-weight">View Profile</td>
+                                                    </tr>
+                                                </thead>
+                                
+                                                <tbody>
+                                                    {% for player in team.players %}
+                                                        <tr class="inner-row">
+                                                        
+                                                            <td class="sub-height"><img class="circle-image" src="{{ player.player.image.url }}">
+                                                            </td>
+                                                            <td class="sub-height">{{ player.player.first_name|title }} {{ player.player.last_name|title }}</td>
+                                                            <td class="sub-height">{{ player.player.jersey_no }}</td>
+                                                            <td class="sub-height"><a href="{% url 'player_profile' player.player.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                
+                                </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+               
+            </div>
+
+           
+        </div>
+    </section>
+{% endblock %}
